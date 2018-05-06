@@ -1,13 +1,14 @@
-class TitleScene extends Phaser.Scene {
+class ChooseFriendScene extends Phaser.Scene {
     constructor(test) {
       super({
-        key: 'TitleScene'
+        key: 'ChooseFriendScene'
       });
     }
     preload() {
     
     }
     create() {
+        
         this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);        
     }
 
@@ -21,4 +22,4 @@ class TitleScene extends Phaser.Scene {
 
 }
 
-export default TitleScene;
+export default ChooseFriendScene;

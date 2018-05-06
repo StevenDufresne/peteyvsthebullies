@@ -72,6 +72,7 @@ module.exports = {
     resolve: {
         alias: {
             'phaser': phaser,
+            'helpers': path.resolve(__dirname, 'src/helpers/')
         }
     }
 }

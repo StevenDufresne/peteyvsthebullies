@@ -1,4 +1,5 @@
 import AnimatedTiles from 'phaser-animated-tiles';
+import Player from './lib/player';
 
 class BootScene extends Phaser.Scene {
     constructor(test) {
@@ -6,49 +7,53 @@ class BootScene extends Phaser.Scene {
         key: 'BootScene'
       });
     }
-    preload()
-    {
-        this.load.image('background-clouds', 'assets/images/clouds.png'); // 16-bit later
-        // Tilemap with a lot of objects and tile-properties tricks
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/super-mario.json');
-        // I load the tiles as a spritesheet so I can use it for both sprites and tiles
-        this.load.spritesheet('tiles', 'assets/images/super-mario.png', { frameWidth: 16, frameHeight: 16 });
-        // Just for fun:
-        this.load.spritesheet('tiles-16bit', 'assets/images/super-mario-16bit.png', { frameWidth: 16, frameHeight: 16 });
-        // Spritesheets with fixed sizes. Should be replaced with atlas:
-        this.load.spritesheet('mario', 'assets/images/mario-sprites.png', { frameWidth: 16, frameHeight: 32 });
-        this.load.spritesheet('sprites16', 'assets/images/16x16sprites.png', { frameWidth: 16, frameHeight: 16 });
-        // Beginning of an atlas to replace spritesheets
-        this.load.atlas('mario-sprites', 'assets/mario-sprites.png', 'assets/mario-sprites.json');
-        // Music to play. Need to cut it for it to loop properly
-        this.load.audio('overworld', [
-          'assets/music/overworld.ogg',
-          'assets/music/overworld.mp3'
-        ]);
-    
-        this.load.audioSprite('sfx', [
-          'assets/audio/sfx.ogg',
-          'assets/audio/sfx.mp3'
-        ], 'assets/audio/sfx.json', {
-            instances: 4
-          });
-    
-        this.load.bitmapFont('font', 'assets/fonts/font.png', 'assets/fonts/font.fnt');
-    
-        // Load plugin for animated tiles. This is just a first build of an upcoming plugin.
-        // It's not optimized and lack features. The source code will be released when an
-        // official first version is released.
-        console.log("before")
-        this.load.plugin('AnimatedTiles', AnimatedTiles);
 
-          console.log("af")
-        this.load.json('attractMode', 'assets/json/attractMode.json');    }
-    create()
-    {
-      console.log("BOOTED");
-//      this.scene.start('MarioBrosScene');
-       this.scene.start('TitleScene');
-        
+    preload() {
+      this.load.image('dash_bg', 'assets/images/background.png');
+      this.load.image('sky', 'assets/images/sky.png')
+      this.load.image('track', 'assets/images/track.png');
+      this.load.image('finish_line', 'assets/images/finishline.png');
+      this.load.image('screen_complete', 'assets/images/screencomplete.png');
+      this.load.image('screen_failure', 'assets/images/failurescreen.png');
+      this.load.image('tap_control', 'assets/images/tapcontrol.png')
+      this.load.image('need_beat', 'assets/images/need_beat.png')
+      this.load.image('player_board', 'assets/images/player_board.png')
+
+      //game
+      this.load.image('game_container', 'assets/images/game_container.png')
+      this.load.image('game_complete_bronze', 'assets/images/game_complete_bronze.png')
+      this.load.image('game_complete_silver', 'assets/images/game_complete_silver.png')
+      this.load.image('game_complete_gold', 'assets/images/game_complete_gold.png')
+
+
+      this.load.image('game_open', 'assets/images/game_open.png')
+      this.load.image('game_locked', 'assets/images/game_locked.png')
+
+      //game sprite
+      this.load.spritesheet('game_sprite', 'assets/images/gamesprite.png',
+        { frameWidth: 150, frameHeight: 150 })
+
+      //Paul character
+      this.load.spritesheet('paul_run', 'assets/images/character40x40_run.png',
+        { frameWidth: 40, frameHeight: 40})
+
+      this.load.spritesheet('paul', 'assets/images/character40x40.png',
+        { frameWidth: 40, frameHeight: 40})
+
+
+      this.load.spritesheet('steve', 'assets/images/blob32x32.png',
+        { frameWidth: 32, frameHeight: 32})
+
+      this.load.spritesheet('steve_run', 'assets/images/blob32x32.png',
+        { frameWidth: 32, frameHeight: 32})
+
+
+      this.player = new Player(this);
+
+    }
+    create() {
+      this.player.save();
+      this.scene.start('PlayerScene');   
     }
 }
 
