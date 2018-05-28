@@ -8,30 +8,41 @@ class GameScene extends Phaser.Scene {
 
         this.lp = new LevelProvider();
     }
-    preload() {
-    }
+    preload() {}
     create() {
         this.player = this.registry.get('player');
+        this.sky = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'sky').setOrigin(0,0);
 
 
-        this.addGameRow(100, 100, 'dash');
+        this.addGameTitle(10, 50, "Mad Dash");
+        this.addGameSubTitle(10, 90, "Take steve down in an epic race!")
+        this.addGameRow(10, 120, 'dash');
 
         //TEMPORARY
         this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);        
 
     }
 
+    addGameTitle(x, y, title) {
+        var title = this.add.text(x, y, title, 
+        { font: "32px Acme", fill: "#fff", align: "center" });
+        this.add.existing(title);
+    }
+
+    addGameSubTitle(x, y, copy) {
+        var title = this.add.text(x, y, copy, 
+        { font: "16px Arial", fill: "#fff", align: "center" });
+        this.add.existing(title);
+    }
+
     addGameRow(startX, startY, key) {
-
-        var gc = this.add.sprite(startX,startY, 'game_container').setOrigin(0, 0);
-
         const levelComplete = this.player.levels[key].length;
+        const gap = 8;
 
         for(var i = 0; i < this.lp.levels[key].length; i++) {
             let asset = 'game_locked';
 
             if(i < levelComplete) {
-                console.log(this.player.levels[key][i].award.tag)
                 asset = `game_complete_${this.player.levels[key][i].award.tag}`;
             }
 
@@ -40,7 +51,7 @@ class GameScene extends Phaser.Scene {
             }
 
 
-            var spr = this.add.sprite((startX + 4) + (i * 49), (startY + 4), asset).setOrigin(0, 0).setInteractive();
+            var spr = this.add.sprite((startX) + (i * (45 + gap)), (startY), asset).setOrigin(0, 0).setInteractive();
             this.add.existing(spr);
             
             if(i <= levelComplete) {

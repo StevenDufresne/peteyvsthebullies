@@ -16,7 +16,6 @@ class GameScene extends Phaser.Scene {
         key: 'DashScene'
       });
 
-
       this.cdTimerConfig = {
         delay: 1000,
         callback: this.cdTimerEvent,
@@ -62,9 +61,6 @@ class GameScene extends Phaser.Scene {
 
     create() {
       this.physics.world.setBounds(0, 0, this.levelWidth, this.gameHeight)
-
-
-     
 
       this.sky = this.add.tileSprite(0, 0, this.levelWidth, this.gameHeight, 'sky').setOrigin(0,0);
 
@@ -180,6 +176,7 @@ class GameScene extends Phaser.Scene {
         this.showComplete();
         this.gameTimer.remove(false);
         this.p.end();
+        this.steve.end()
     }
 
     showTimerScore() {
@@ -188,13 +185,12 @@ class GameScene extends Phaser.Scene {
 
     showComplete() {
       let assets = 'screen_failure'
-      let text = "Oh Noy"
-
+      let text = "You suck"
 
       if(this.p.body.x >= this.steve.body.x) {
         const award = this.lp.getDashAward(this.myTime, this.level);
 
-        this.player.updateLevel('dash', {
+        this.player.updateLevel('dash', this.levelNumber,  {
           time: this.myTime,
           award: award,
         })
@@ -212,6 +208,7 @@ class GameScene extends Phaser.Scene {
 
       this.sc.setCaption(text)
       this.sc.show();
+
     }
 
     showCountdown() {

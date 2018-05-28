@@ -7,7 +7,7 @@ export default class Steve extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this);
     this.body.setCollideWorldBounds(true);
     this.setInteractive();
-    this.setScale(3);
+    this.setScale(0.25);
     this.momentum = 0;
     this.started = false;
     this.endMomentum = config.speed;
@@ -31,13 +31,15 @@ export default class Steve extends Phaser.GameObjects.Sprite {
   }
 
   update(time, delta) {
-    this.body.setVelocityX(this.momentum);
+    if(this.body && this.started) {
+      this.body.setVelocityX(this.momentum);
+      this.anims.play('steve_run', true);
+    }
   }
 
   start() {
     this.started = true;
     this.accelTimer = this.scene.time.addEvent(this.accelConfig);
-
   }
 
   end() {

@@ -18,6 +18,8 @@ class BootScene extends Phaser.Scene {
       this.load.image('tap_control', 'assets/images/tapcontrol.png')
       this.load.image('need_beat', 'assets/images/need_beat.png')
       this.load.image('player_board', 'assets/images/player_board.png')
+      this.load.image('chalkboard', 'assets/images/chalkboard.png')
+      this.load.image('petey', 'assets/images/petey.png')
 
       //game
       this.load.image('game_container', 'assets/images/game_container.png')
@@ -40,12 +42,14 @@ class BootScene extends Phaser.Scene {
       this.load.spritesheet('paul', 'assets/images/character40x40.png',
         { frameWidth: 40, frameHeight: 40})
 
+      this.load.spritesheet('steve', 'assets/images/ninja_idle232x439.png',
+        { frameWidth: 232, frameHeight: 439})
 
-      this.load.spritesheet('steve', 'assets/images/blob32x32.png',
-        { frameWidth: 32, frameHeight: 32})
+      this.load.spritesheet('steve_run', 'assets/images/ninja_run232x439.png',
+        { frameWidth: 363, frameHeight: 439})
 
-      this.load.spritesheet('steve_run', 'assets/images/blob32x32.png',
-        { frameWidth: 32, frameHeight: 32})
+      this.load.spritesheet('power_sprite', 'assets/images/power_sprite50x50.png',
+        { frameWidth: 50, frameHeight: 50 })
 
 
       this.player = new Player(this);

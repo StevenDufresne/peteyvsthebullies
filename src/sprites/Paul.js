@@ -17,11 +17,15 @@ export default class Paul extends Phaser.GameObjects.Sprite {
     this.anims.load('paul_run');
     this.anims.play('paul_idle');
 
-    this.on('pointerdown', this.tapped, this);
+    this.scene.input.on('pointerdown', this.tapped, this)
     this.scene.scene.bringToTop(this);
   }
 
   update(time, delta) {
+    if(!this.started) {
+      return;
+    }
+    
     if(this.momentum > 0) {
       this.anims.play('paul_run', true);
       this.friction();

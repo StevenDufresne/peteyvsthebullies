@@ -1,5 +1,7 @@
 class LevelProvider {
   constructor() {
+    var difficulty = 1;
+
     this.levels = {
       dash: [
         {
@@ -150,7 +152,7 @@ class LevelProvider {
           }
         },
         {
-          steveVelocity: 1000,
+          steveVelocity: difficulty * 1000,
           distance: 7000,
           bronze: 15000,
           silver: 10000,

@@ -42,8 +42,8 @@ class Player {
       return Object.keys(this.levels[key]);
     }
 
-    updateLevel(key, obj) {
-      this.levels[key].push(obj)
+    updateLevel(key, levelId, obj) {
+      this.levels[key] = Object.assign([], this.levels[key], { [levelId]: obj });
 
       this.mapStrengths();
       this.save();
